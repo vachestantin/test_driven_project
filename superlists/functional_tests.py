@@ -19,7 +19,7 @@ class NewVisitorTest(unittest.TestCase):
 
         #웹 페이지 타이틀과 헤더가 'To-Do'를 표시하고 있다
         self.assertIn('To-Do', self.browser.title)
-        header_text = self.browser.find_elements_by_tag_name('h1').text
+        header_text = self.browser.find_element_by_tag_name('h1').text
         self.assertIn('To-Do', header_text)
 
         inputbox = self.browser.find_element_by_id('id_new_item')
@@ -36,6 +36,7 @@ class NewVisitorTest(unittest.TestCase):
         rows = table.find_elements_by_tag_name('tr')
         self.assertTrue(
             any(row.text == '1: 공작깃털 사기' for row in rows),
+            "신규 작업이 테이블에 표시되지 않는다"
         )
 
         #강제적으로 테스트 실패를 밣생시켜 에러 메시지를 출력한다
