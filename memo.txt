@@ -17,3 +17,6 @@ django-admin startproject superlists
 이제 '서버를 켜고' functional_test.py를 실행시키면 테스트가 성공한다
 python functional_test.py
 
+[Unittest 실행 명령어]
+python -m unittest 파일명.py
+

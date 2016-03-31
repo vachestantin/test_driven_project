@@ -4,6 +4,7 @@ import unittest
 
 
 class NewVisitorTest(unittest.TestCase):
+    
     def setUp(self): #각각의 테스트를 수행하지 전에 브라우저를 실행한다
         self.browser = webdriver.Firefox()
         self.browser.implicitly_wait(3) #그냥 3초간 기다리는 것
