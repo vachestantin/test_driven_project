@@ -23,3 +23,6 @@ python -m unittest 파일명.py
 [앞으로의 기능 테스트 명령어] (파이썬 명령어로 앱을 생성한 것은 아니지만 functional_tests를 앱 형태로 만들었다)
 python manage test functional_tests
 
+[selenium update] (가끔 해주는게 좋다)
+pip install --upgrade selenium
+
