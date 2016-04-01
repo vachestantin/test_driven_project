@@ -26,3 +26,7 @@ python manage test functional_tests
 [selenium update] (가끔 해주는게 좋다)
 pip install --upgrade selenium
 
+
+
+[가상환경] (Django 1.7버전)
+pip install django==1.7 selenium
