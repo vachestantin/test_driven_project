@@ -1,4 +1,5 @@
 import unittest, re
+# @unittest.skip
 
 from django.core.urlresolvers import resolve
 from django.http import HttpRequest
@@ -14,7 +15,6 @@ class HomePageTest(TestCase):
         found = resolve('/')
         self.assertEqual(found.func, home_page)
 
-    # @unittest.skip
     def test_home_page_returns_correct_html(self):
         request = HttpRequest()
         response = home_page(request)
@@ -27,15 +27,20 @@ class HomePageTest(TestCase):
 
         self.assertEqual(observed_html, expected_html)
 
-@unittest.skip
+
 class ItemModelTest(TestCase):
-    def test_saving_and_retrieving_items(self): # p117
+    def test_saving_and_retrieving_items(self): 
+        list_ = List()
+        list_.save()
+
         first_item = Item()
         first_item.text = '첫 번째 아이템'
+        first_item.list = list_
         first_item.save()
 
         second_item = Item()
         second_item.text = '두 번째 아이템'
+        second_item.list = list_
         second_item.save()
 
         saved_items = Item.objects.all()

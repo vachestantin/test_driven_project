@@ -41,7 +41,7 @@ class NewVisitorTest(LiveServerTestCase):
         self.assertRegex(edith_list_url, '/lists/.+')
         self.check_for_row_in_list_table('1: 공작깃털 사기')
 
-        # 에디스는 매우 체계적인 사람이다
+        # (에디스는 매우 체계적인 사람이다)
         inputbox = self.browser.find_element_by_id('id_new_item')
         inputbox.send_keys('공작깃털을 이용해서 그물 만들기\n')
 
