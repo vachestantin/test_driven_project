@@ -63,7 +63,7 @@ class NewVisitorTest(LiveServerTestCase):
 
         # 그는 에디스보다 재미 없다
         inputbox = self.browser.find_element_by_id('id_new_item')
-        inputbox.send_keys('우류 사기\n')
+        inputbox.send_keys('우유 사기\n')
 
         # 프란시스가 전용 URL을 취득한다
         francis_list_url = self.browser.current_url
