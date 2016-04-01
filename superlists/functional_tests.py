@@ -28,12 +28,23 @@ class NewVisitorTest(unittest.TestCase):
             '작업 아이템 입력'
         )
 
-        inputbox.send_keys('공작깃털 사기\n')
+        inputbox.send_keys('공작깃털 사기')
+        inputbox.send_keys(Keys.ENTER) # Keys.ENTER == '\n'
 
         table = self.browser.find_element_by_id('id_list_table')
         rows = table.find_elements_by_tag_name('tr')
         self.assertIn('1: 공작깃털 사기', [row.text for row in rows])
 
+        inputbox = self.browser.find_element_by_id('id_new_item')
+        inputbox.send_keys('공작깃털을 이용해서 그물 만들기\n')
+
+        table = self.browser.find_element_by_id('id_list_table')
+        rows = table.find_elements_by_tag_name('tr')
+        self.assertIn('1: 공작깃털 사기', [row.text for row in rows])
+        self.assertIn(
+            '2: 공작깃털을 이용해서 그물 만들기',
+            [row.text for row in rows]
+        )
 
 
 
@@ -46,7 +57,7 @@ class NewVisitorTest(unittest.TestCase):
 
 
         #강제적으로 테스트 실패를 밣생시켜 에러 메시지를 출력한다
-        self.fail('Finish the test!')
+        self.fail('Successfully Failed!')
 
         if __name__ == '__main__':
             unittest.main(warnings='ignore')

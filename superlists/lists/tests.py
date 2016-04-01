@@ -22,10 +22,9 @@ class HomePageTest(TestCase):
 
         # CSRF tokens don't get render_to_string
         csrf_regex = r'<input[^>]+csrfmiddlewaretoken[^>]+>'
+        # decode를 이용해서 바이트 데이터를 유니코드 문자열로 변환한다
         observed_html = re.sub(csrf_regex, '', response.content.decode())
 
-        # decode를 이용해서 바이트 데이터를 유니코드 문자열로 변환한다
-        # self.assertEqual(response.content.decode(), expected_html)
         self.assertEqual(observed_html, expected_html)
 
     def test_home_page_can_save_a_POST_request(self):
@@ -37,11 +36,9 @@ class HomePageTest(TestCase):
         csrf_regex = r'<input[^>]+csrfmiddlewaretoken[^>]+>'
         observed_html = re.sub(csrf_regex, '', response.content.decode())
 
-
         self.assertIn('신규 작업 아이템', response.content.decode())
         expected_html = render_to_string(
             'home.html',
             {'new_item_text': '신규 작업 아이템'}
         )
-        # self.assertEqual(response.content.decode(), expected_html)
         self.assertEqual(observed_html, expected_html)
