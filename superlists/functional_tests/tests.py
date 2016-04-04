@@ -71,20 +71,8 @@ class NewVisitorTest(LiveServerTestCase):
         self.assertNotEqual(francis_list_url, edith_list_url)
 
         # 에디스가 입력한 흔적이 없다는 것을 다시 확인한다
-        page_text = self.browser.find_element_by_tag_name('body').texts
+        page_text = self.browser.find_element_by_tag_name('body').text
         self.assertNotIn('공작깃털 사기', page_text)
         self.assertIn('우유 사기', page_text)
 
         # 둘 다 만족하고 잠자리에 든다
-
-
-
-
-
-
-
-
-
-
-        #강제적으로 테스트 실패를 밣생시켜 에러 메시지를 출력한다
-        self.fail('Successfully Failed !!')
