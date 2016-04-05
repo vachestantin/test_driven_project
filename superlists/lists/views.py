@@ -8,9 +8,7 @@ def home_page(request):
 
 def view_list(request, pk):
     list_ = List.objects.get(id=pk)
-    # items = Item.objects.filter(list=list_)
     return render(request, 'list.html', {
-        # 'items': items,
         'list': list_,
     })
 

@@ -8,8 +8,8 @@ python -m venv hwenv
 [가상환경 진입]
 hwenv\Script\activate.bat
 
-[기본 파이썬 패키지]
-pip install django selenium
+[기본 파이썬 패키지] (계속 여기에 업데이트)
+pip install django selenium django-bootstrap3
 
 [Django 가동 및 실행 - p6]
 django-admin startproject superlists
@@ -27,6 +27,3 @@ python manage test functional_tests
 pip install --upgrade selenium
 
 
-
-[가상환경] (Django 1.7버전)
-pip install django==1.7 selenium
