@@ -1,9 +1,9 @@
+
 import unittest
 
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 
 
 class NewVisitorTest(StaticLiveServerTestCase):
@@ -12,7 +12,6 @@ class NewVisitorTest(StaticLiveServerTestCase):
         self.browser.implicitly_wait(3) #그냥 3초간 기다리는 것
 
     def tearDown(self): #테스트를 통과하지 못해도 브라우저는 닫는다
-        self.browser.refresh()
         self.browser.quit()
 
     def check_for_row_in_list_table(self, row_text):
@@ -37,8 +36,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
         )
 
         # 공작깃털 사기 아이템이 추가된다
-        inputbox.send_keys('공작깃털 사기')
-        inputbox.send_keys(Keys.ENTER) # Keys.ENTER == '\n'
+        inputbox.send_keys('공작깃털 사기\n')
         edith_list_url = self.browser.current_url
         self.assertRegex(edith_list_url, '/lists/.+')
         self.check_for_row_in_list_table('1: 공작깃털 사기')
