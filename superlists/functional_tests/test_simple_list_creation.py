@@ -1,39 +1,11 @@
 
-import unittest, sys
-
-from django.contrib.staticfiles.testing import StaticLiveServerTestCase
+from .base import FunctionalTest
 
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 
 
-class NewVisitorTest(StaticLiveServerTestCase):
-    @classmethod
-    def setUpClass(cls): #각각의 테스트를 수행하지 전에 브라우저를 실행한다
-        for arg in sys.argv:
-            if 'liveserver' in arg:
-                cls.server_url = 'http://' + arg.split('=')[1]
-                return
-        super().setUpClass()
-        cls.server_url = cls.live_server_url
-
-    @classmethod
-    def tearDownClass(cls): #테스트를 통과하지 못해도 브라우저는 닫는다
-        if cls.server_url == cls.live_server_url:
-            super().tearDownClass()
-
-    def setUp(self): #각각의 테스트를 수행하지 전에 브라우저를 실행한다
-        self.browser = webdriver.Firefox()
-        self.browser.implicitly_wait(3) #그냥 3초간 기다리는 것
-
-    def tearDown(self): #테스트를 통과하지 못해도 브라우저는 닫는다
-        self.browser.refresh()
-        self.browser.quit()
-
-    def check_for_row_in_list_table(self, row_text):
-        table = self.browser.find_element_by_id('id_list_table')
-        rows = table.find_elements_by_tag_name('tr')
-        self.assertIn(row_text, [row.text for row in rows])
-
+class NewVisitorTest(FunctionalTest):
     # @unittest.skip
     def test_can_start_a_list_and_retrieve_it_later(self): #테스트 내용을 알 수 있는 명칭으로 정하는 것이 좋다
         # 에디스는 멋진 온라인 앱이 나왔다는 소식을 듣고 해당 웹 사이트를 확인하러 간다
@@ -91,26 +63,3 @@ class NewVisitorTest(StaticLiveServerTestCase):
         self.assertIn('우유 사기', page_text)
 
         # 둘 다 만족하고 잠자리에 든다
-
-
-    def test_layout_and_styling(self):
-        # 에디스는 메인 페이지를 방문한다
-        self.browser.get(self.server_url)
-        self.browser.set_window_size(1024, 768)
-
-        # 그녀는 입력 상자가 가운데 배치된 것을 본다
-        inputbox = self.browser.find_element_by_id('id_new_item')
-        self.assertAlmostEqual(
-            inputbox.location['x'] + inputbox.size['width'] / 2,
-            512,
-            delta=10
-        )
-
-        # 그녀는 새로운 리스트를 시작하고 입력 상자가 가운데 배치된 것을 확인한다
-        inputbox.send_keys('testing\n')
-        inputbox = self.browser.find_element_by_id('id_new_item')
-        self.assertAlmostEqual(
-            inputbox.location['x'] + inputbox.size['width'] / 2,
-            512,
-            delta=10
-        )
