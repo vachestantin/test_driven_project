@@ -33,3 +33,6 @@ class ItemValidationTest(FunctionalTest):
         self.browser.find_element_by_id('id_new_item').send_keys('차 만들기\n')
         self.check_for_row_in_list_table('1: 우유 사기')
         self.check_for_row_in_list_table('2: 차 만들기')
+
+
+        self.browser.refresh()

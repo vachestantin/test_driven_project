@@ -39,6 +39,7 @@ class NewVisitorTest(FunctionalTest):
         # 새로운 사용자 프란시스 접속
 
         ## 새로운 브라우저 세션을 이용해서 에디스의 정보가 쿠키를 통해 유입되는 것을 방지한다 #
+        self.browser.refresh()
         self.browser.quit()
         self.browser = webdriver.Firefox()
 
@@ -63,3 +64,5 @@ class NewVisitorTest(FunctionalTest):
         self.assertIn('우유 사기', page_text)
 
         # 둘 다 만족하고 잠자리에 든다
+
+        self.browser.refresh()
