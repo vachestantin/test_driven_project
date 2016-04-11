@@ -16,7 +16,7 @@ class NewVisitorTest(FunctionalTest):
         header_text = self.browser.find_element_by_tag_name('h1').text
         self.assertIn('To-Do', header_text)
 
-        inputbox = self.browser.find_element_by_id('id_new_item')
+        inputbox = self.get_item_input_box()
         self.assertEqual(
             inputbox.get_attribute('placeholder'),
             '작업 아이템 입력'
@@ -29,7 +29,7 @@ class NewVisitorTest(FunctionalTest):
         self.check_for_row_in_list_table('1: 공작깃털 사기')
 
         # (에디스는 매우 체계적인 사람이다)
-        inputbox = self.browser.find_element_by_id('id_new_item')
+        inputbox = self.get_item_input_box()
         inputbox.send_keys('공작깃털을 이용해서 그물 만들기\n')
 
         # 페이지는 다시 갱신되고, 두 개 아이템이 목록에 보인다
@@ -50,7 +50,7 @@ class NewVisitorTest(FunctionalTest):
         self.assertNotIn('그물 만들기', page_text)
 
         # 그는 에디스보다 재미 없다
-        inputbox = self.browser.find_element_by_id('id_new_item')
+        inputbox = self.get_item_input_box()
         inputbox.send_keys('우유 사기\n')
 
         # 프란시스가 전용 URL을 취득한다
