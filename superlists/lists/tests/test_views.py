@@ -114,6 +114,19 @@ class ListViewTest(TestCase):
         response = self.post_invalid_input()
         self.assertContains(response, escape(EMPTY_LIST_ERROR))
 
+    @unittest.skip
+    def test_duplicate_item_validation_errors_end_up_on_lists_page(self):
+        list1 = List.objects.create()
+        item1 = Item.objects.create(list=list1, text='textey')
+        response = self.client.post(
+            '/lists/%d/' % (list1.id,),
+            data={'text': 'textey'}
+        )
+        expectet_error = escape("이미 리스트에 해당 아이템이 있습니다")
+        self.assertContains(response, expectet_error)
+        self.assertTemplateUsed(response, 'list.html')
+        self.assertEqual(Item.objects.all().count(), 1)
+
 
     def test_displays_item_form(self):
         list_ = List.objects.create()
