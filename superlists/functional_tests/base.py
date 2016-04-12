@@ -26,7 +26,6 @@ class FunctionalTest(StaticLiveServerTestCase):
         self.browser.implicitly_wait(3) #그냥 3초간 기다리는 것
 
     def tearDown(self): #테스트를 통과하지 못해도 브라우저는 닫는다
-        self.browser.refresh()
         self.browser.quit()
 
     def check_for_row_in_list_table(self, row_text):
