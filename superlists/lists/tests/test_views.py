@@ -89,7 +89,6 @@ class ListViewTest(TestCase):
 
         self.assertRedirects(response, '/lists/%d/' % (correct_list.id,))
 
-
     def post_invalid_input(self):
         list_ = List.objects.create()
         return self.client.post(
