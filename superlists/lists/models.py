@@ -11,8 +11,12 @@ class List(models.Model):
 
 
 class Item(models.Model):
-    text = models.TextField(default='')
+    text = models.TextField(default='', unique=False)
     list = models.ForeignKey(List, default=None)
 
+    class Meta:
+        ordering = ('id',)
+        unique_together = ('list', 'text')
+
     def __str__(self):
-        return '{}번째 아이템: {}'.format(self.pk, self.text)
+        return self.text
