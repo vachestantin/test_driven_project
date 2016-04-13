@@ -1,7 +1,9 @@
 
+import unittest
+
 from .base import FunctionalTest
 
-
+# @unittest.skip
 class LayoutAndStylingTest(FunctionalTest):
     def test_layout_and_styling(self):
         # 에디스는 메인 페이지를 방문한다
@@ -26,4 +28,4 @@ class LayoutAndStylingTest(FunctionalTest):
         )
 
 
-        self.browser.refresh()
+        # self.browser.refresh()

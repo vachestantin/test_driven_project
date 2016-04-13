@@ -1,12 +1,14 @@
 
+import unittest
+
 from .base import FunctionalTest
 
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
+# from selenium.webdriver.common.keys import Keys
 
-
+# @unittest.skip
 class NewVisitorTest(FunctionalTest):
-    # @unittest.skip
+
     def test_can_start_a_list_and_retrieve_it_later(self): #테스트 내용을 알 수 있는 명칭으로 정하는 것이 좋다
         # 에디스는 멋진 온라인 앱이 나왔다는 소식을 듣고 해당 웹 사이트를 확인하러 간다
         self.browser.get(self.server_url)
@@ -65,4 +67,4 @@ class NewVisitorTest(FunctionalTest):
 
         # 둘 다 만족하고 잠자리에 든다
 
-        self.browser.refresh()
+        # self.browser.refresh()
