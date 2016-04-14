@@ -4,9 +4,10 @@ import sys
 
 from accounts.models import ListUser
 
+
 class PersonaAuthenticationBackend(object):
 
-    def authenticate(self):
+    def authenticate(self, assertion):
         # 어선셜을 모질라의 증명 서비스로 전송
         data = {'assertion': assertion, 'audience': 'localhost'}
         print('sending to mozilla', data, file=sys.stderr)
@@ -26,5 +27,5 @@ class PersonaAuthenticationBackend(object):
                 except ListUser.DoesNotExist:
                     return ListUser.objects.create(email=email)
 
-    def get_user(self):
+    def get_user(self, email):
         return ListUser.objects.get(email=email)

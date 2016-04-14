@@ -15,6 +15,6 @@ def login(request):
         auth_login(request, user)
     return redirect('/')
 
-def logout(self):
+def logout(request):
     auth_logout(request)
     return redirect('/')

@@ -3,7 +3,7 @@ import unittest
 
 from .base import FunctionalTest
 
-# @unittest.skip
+@unittest.skip
 class LayoutAndStylingTest(FunctionalTest):
     def test_layout_and_styling(self):
         # 에디스는 메인 페이지를 방문한다

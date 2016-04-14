@@ -6,7 +6,7 @@ from .base import FunctionalTest
 # from selenium.webdriver.common.keys import Keys
 
 
-# @unittest.skip
+@unittest.skip
 class ItemValidationTest(FunctionalTest):
 
     def get_error_element(self):
