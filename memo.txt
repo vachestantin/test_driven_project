@@ -8,8 +8,11 @@ python -m venv hwenv
 [가상환경 진입]
 hwenv\Scripts\activate.bat
 
+[pip 업그레이드]
+python -m pip install --upgrade pip
+
 [기본 파이썬 패키지] (계속 여기에 업데이트)
-pip install django selenium django-bootstrap3
+pip install django selenium django-bootstrap3 requests
 
 [Django 가동 및 실행 - p6]
 django-admin startproject superlists

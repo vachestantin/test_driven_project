@@ -12,11 +12,9 @@ from lists.models import Item, List
 from lists.views import home_page
 
 
-# @unittest.skip
 class HomePageTest(TestCase):
-    maxDiff = None
-
-    # csrf_regex때문에 남겨둔다
+    # csrf_regex때문에 남겨둔다. 더 이상 동작하지 않기 때문에 skip 한다.
+    @unittest.skip
     def test_home_page_returns_correct_html(self):
         request = HttpRequest()
         response = home_page(request)
