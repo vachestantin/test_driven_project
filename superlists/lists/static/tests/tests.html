@@ -8,13 +8,26 @@
 
     <body>
         <div id="qunit"></div>
-        <div id="qunit-fixture"></div>
+        <div id="qunit-fixture">
+            <form>
+                <input type="text" />
+                <div class="has-error">에러 텍스트</div>
+            </form>
+        </div>
+
+        <script src="http://code.jquery.com/jquery.min.js"></script>
         <script src="qunit.js"></script>
+        <script src="../list.js"></script>
         <script>
     /* global $, test, equal */
 
-    test("스모크 테스트", function () {
-        equal(1, 1, "계산 성공!");
+    test("키 입력 시에 에러가 숨겨져야 한다", function () {
+        $('input').trigger('keypress');
+        equal($('.has-error').is(':visible'), false);
+    });
+
+    test("키 입력이 없으면 에러가 숨겨지지 않는다", function () {
+        equal($('.has-error').is(':visible'), true);
     });
 
         </script>
