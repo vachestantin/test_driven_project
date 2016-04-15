@@ -1,7 +1,7 @@
 
 import unittest
 
-from .base import FunctionalTest
+from .test_base import FunctionalTest
 
 # @unittest.skip
 class LayoutAndStylingTest(FunctionalTest):
