@@ -1,4 +1,6 @@
 
+# /accounts/urls.py
+
 from django.conf.urls import patterns, url
 from django.contrib.auth.views import logout
 from . import views as accounts_views

@@ -1,4 +1,6 @@
 
+# /lists/views.py
+
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.shortcuts import redirect
@@ -18,7 +20,8 @@ def new_list(request):
     form = ItemForm(data=request.POST)
     if form.is_valid():
         list_ = List()
-        list_.owner = request.user
+        if request.user.is_authenticated():
+            list_.owner = request.user
         list_.save()
         form.save(for_list=list_)
         return redirect(list_)

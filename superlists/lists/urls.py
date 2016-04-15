@@ -1,4 +1,6 @@
 
+# /lists/urls.py
+
 from django.conf.urls import patterns, url
 from . import views as lists_views
 
