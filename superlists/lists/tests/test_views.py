@@ -1,5 +1,6 @@
 import unittest, re
 
+from django.contrib.auth import get_user_model
 from django.core.urlresolvers import resolve
 from django.http import HttpRequest
 from django.template.loader import render_to_string
@@ -12,11 +13,14 @@ from lists.models import Item, List
 from lists.views import home_page
 
 
+User = get_user_model()
+
 # @unittest.skip
 class HomePageTest(TestCase):
     maxDiff = None
 
     # csrf_regex때문에 남겨둔다
+    @unittest.skip
     def test_home_page_returns_correct_html(self):
         request = HttpRequest()
         response = home_page(request)
@@ -172,6 +176,18 @@ class NewListTest(TestCase):
         self.assertEqual(Item.objects.count(), 0)
 
 
+class MyListTest(TestCase):
+
+    def test_my_lists_url_renders_my_lists_template(self):
+        User.objects.create(email='a@b.com')
+        response = self.client.get('/lists/users/a@b.com/')
+        self.assertTemplateUsed(response, 'my_lists.html')
+
+    def test_passes_correct_owner_to_template(self):
+        User.objects.create(email='wrong@owner.com')
+        correct_user = User.objects.create(email='a@b.com')
+        response = self.client.get('/lists/users/a@b.com/')
+        self.assertEqual(response.context['owner'], correct_user)
 
 
 
@@ -181,4 +197,16 @@ class NewListTest(TestCase):
 
 
 
-# 끝
+
+
+
+
+
+
+
+
+
+
+
+
+    # 끝
