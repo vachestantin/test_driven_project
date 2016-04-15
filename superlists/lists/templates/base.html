@@ -15,7 +15,7 @@
             <a class="navbar-brand" href="/">Superlists</a>
             {% if user.email %}
                 <ul class="nav navbar-nav">
-                    <!-- --><li><a href="{% url 'my_lists' user.email %}">나의 목록</a></li>
+                    <li><a href="{% url 'lists:my_lists' user.email %}">나의 목록</a></li>
                 </ul>
                 <a class="btn navbar-btn navbar-right" id="id_logout" href="{% url 'accounts:logout' %}">로그아웃</a>
                 <span class="navbar-text navbar-right">로그인됨 {{ user.email }}</span>

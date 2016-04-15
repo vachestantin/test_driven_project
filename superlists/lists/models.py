@@ -12,6 +12,10 @@ class List(models.Model):
     def get_absolute_url(self):
         return reverse('lists:view_list', args=[self.id])
 
+    @property
+    def name(self):
+        return self.item_set.first().text
+
     def __str__(self):
         return '{}번째 리스트'.format(self.pk)
 

@@ -58,6 +58,6 @@ class MyListsTest(FunctionalTest):
         # 로그아웃한다. '나의 목록' 옵션이 사라진다
         self.browser.find_element_by_id('id_logout').click()
         self.assertEqual(
-            self.browser.find_element_by_link_text('나의 목록'),
+            self.browser.find_elements_by_link_text('나의 목록'),
             []
         )
