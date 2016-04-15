@@ -6,7 +6,7 @@ from .base import FunctionalTest
 from selenium import webdriver
 # from selenium.webdriver.common.keys import Keys
 
-# @unittest.skip
+@unittest.skip
 class NewVisitorTest(FunctionalTest):
 
     def test_can_start_a_list_and_retrieve_it_later(self): #테스트 내용을 알 수 있는 명칭으로 정하는 것이 좋다

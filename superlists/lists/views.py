@@ -1,9 +1,11 @@
 
 from django.core.exceptions import ValidationError
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
+from django.shortcuts import render
 
-from lists.forms import ItemForm, ExistingListItemForm
-from lists.models import Item, List
+from lists.forms import ExistingListItemForm
+from lists.forms import ItemForm
+from lists.models import List
 
 
 def home_page(request):
@@ -16,7 +18,7 @@ def new_list(request):
         form.save(for_list=list_)
         return redirect(list_)
     else:
-        return render(request, 'home.html', {'form': form})
+        return render(request, 'home.html', {"form": form})
 
 def view_list(request, pk):
     list_ = List.objects.get(id=pk)
@@ -26,4 +28,4 @@ def view_list(request, pk):
         if form.is_valid():
             form.save()
             return redirect(list_)
-    return render(request, 'list.html', {'list': list_, 'form': form})
+    return render(request, 'list.html', {'list': list_, "form": form})
