@@ -26,6 +26,8 @@ python manage test functional_tests
 [selenium update] (가끔 해주는게 좋다)
 pip install --upgrade selenium
 
-
 [requirements.txt 생성]
 pip freeze > requirements.txt
+
+[phantomjs는 환경변수에 넣었으니 그냥 쓰면 됨]
+phantomjs --version
