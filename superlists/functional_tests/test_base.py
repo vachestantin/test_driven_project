@@ -5,7 +5,12 @@ import time
 
 from datetime import datetime
 
+from django.conf import settings
+from django.contrib.auth import BACKEND_SESSION_KEY
+from django.contrib.auth import SESSION_KEY
+from django.contrib.auth import get_user_model
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
+from django.contrib.sessions.backends.db import SessionStore
 
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
@@ -16,6 +21,7 @@ DEFAULT_WAIT = 5
 SCREEN_DUMP_LOCATION = os.path.abspath(
     os.path.join(os.path.dirname(__file__), 'screendumps')
 )
+User = get_user_model()
 
 class FunctionalTest(StaticLiveServerTestCase):
     @classmethod
@@ -111,3 +117,19 @@ class FunctionalTest(StaticLiveServerTestCase):
         self.wait_for_element_with_id('id_login')
         navbar = self.browser.find_element_by_css_selector('.navbar')
         self.assertNotIn(email, navbar.text)
+
+    def create_pre_authenticated_session(self, email):
+        user = User.objects.create(email=email)
+        session = SessionStore()
+        session[SESSION_KEY] = user.pk
+        session[BACKEND_SESSION_KEY] = settings.AUTHENTICATION_BACKENDS[0]
+        session.save()
+
+        ## 쿠키를 설정하기 위해 도메인 접속이 필요하다
+        ## 404 페이지가 뜬다
+        self.browser.get(self.server_url + "/404_no_such_url/")
+        self.browser.add_cookie(dict(
+            name=settings.SESSION_COOKIE_NAME,
+            value=session.session_key,
+            path='/',
+        ))
