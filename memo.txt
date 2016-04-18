@@ -27,3 +27,5 @@ python manage test functional_tests
 pip install --upgrade selenium
 
 
+[requirements.txt »ý¼º]
+pip freeze > requirements.txt
