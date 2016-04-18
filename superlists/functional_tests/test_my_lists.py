@@ -1,5 +1,5 @@
 
-from .test_base import FunctionalTest
+from .base import FunctionalTest
 
 
 class MyListsTest(FunctionalTest):

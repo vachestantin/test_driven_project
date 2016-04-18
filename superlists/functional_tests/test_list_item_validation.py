@@ -1,7 +1,7 @@
 
 import unittest
 
-from .test_base import FunctionalTest
+from .base import FunctionalTest
 
 # from selenium.webdriver.common.keys import Keys
 
