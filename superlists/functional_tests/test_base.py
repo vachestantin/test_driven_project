@@ -8,9 +8,11 @@ from datetime import datetime
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 
 from selenium import webdriver
+from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.support.ui import WebDriverWait
 
 
+DEFAULT_WAIT = 5
 SCREEN_DUMP_LOCATION = os.path.abspath(
     os.path.join(os.path.dirname(__file__), 'screendumps')
 )
@@ -32,7 +34,7 @@ class FunctionalTest(StaticLiveServerTestCase):
 
     def setUp(self): #각각의 테스트를 수행하지 전에 브라우저를 실행한다
         self.browser = webdriver.Firefox()
-        self.browser.implicitly_wait(3) #그냥 3초간 기다리는 것
+        self.browser.implicitly_wait(DEFAULT_WAIT) #그냥 3초간 기다리는 것
 
     def tearDown(self): #테스트를 통과하지 못해도 브라우저는 닫는다
         if self._test_has_failed():
@@ -73,6 +75,16 @@ class FunctionalTest(StaticLiveServerTestCase):
             windowid=self._windowid,
             timestamp=timestamp
         )
+
+    def wait_for(self, function_with_assertion, timeout=DEFAULT_WAIT):
+        start_time = time.time()
+        while time.time() - start_time < timeout:
+            try:
+                return function_with_assertion()
+            except (AssertionError, WebDriverException):
+                time.sleep(0.1)
+        # 다시 한 번 시도, 문제가 있으면 테스트 실패
+        return function_with_assertion()
 
     def get_item_input_box(self):
         return self.browser.find_element_by_id('id_text')
