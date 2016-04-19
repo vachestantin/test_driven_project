@@ -13,7 +13,7 @@ class HomePage(object):
         return self
 
     def get_item_input(self):
-        return self.test.browser.find_element_by_id('ITEM_INPUT_ID')
+        return self.test.browser.find_element_by_id(ITEM_INPUT_ID)
 
     def start_new_list(self, item_text):
         self.go_to_home_page()
@@ -37,7 +37,7 @@ class ListPage(object):
         self.test = test
 
     def get_list_table_rows(self):
-        return self.test.browser.find_element_by_css_selector(
+        return self.test.browser.find_elements_by_css_selector(
             '#id_list_table tr'
         )
 
@@ -54,7 +54,7 @@ class ListPage(object):
         )
 
     def get_shared_with_list(self):
-        return self.test.browser.find_element_by_css_selector(
+        return self.test.browser.find_elements_by_css_selector(
             '.list-share'
         )
 
@@ -66,7 +66,7 @@ class ListPage(object):
         ))
 
     def get_item_input(self):
-        return self.test.browser.find_element_by_id('ITEM_INPUT_ID')
+        return self.test.browser.find_element_by_id(ITEM_INPUT_ID)
 
     def add_new_item(self, item_text):
         current_pos = len(self.get_list_table_rows())

@@ -8,6 +8,7 @@ from django.shortcuts import render
 
 from lists.forms import ExistingListItemForm
 from lists.forms import ItemForm
+# from lists.forms import NewListForm
 from lists.models import List
 
 
@@ -41,3 +42,8 @@ def view_list(request, pk):
 def my_lists(request, email):
     owner = User.objects.get(email=email)
     return render(request, 'my_lists.html', {'owner': owner})
+
+def share_list(request, pk):
+    list_ = List.objects.get(id=pk)
+    list_.shared_with.add(request.POST['email'])
+    return redirect(list_)

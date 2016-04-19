@@ -1,10 +1,10 @@
 
 import unittest
 
+from selenium import webdriver
+
 from .base import FunctionalTest
 from .home_and_list_pages import HomePage
-
-from selenium import webdriver
 
 
 def quit_if_possible(browser):
@@ -30,13 +30,13 @@ class SharingTest(FunctionalTest):
 
         # 에디스는 메인 페이지를 방문해서 목록 작성을 시작한다
         self.browser = edith_browser
-        list_page = HomePage(self).start_new_list('도움 요청\n')
+        list_page = HomePage(self).start_new_list('도움 요청')
 
         # '이 목록 공유' 옵션을 발견한다
         share_box = list_page.get_share_box()
         self.assertEqual(
             share_box.get_attribute('placeholder'),
-                'your-friend@example.com'
+            'your-friend@example.com'
         )
 
         # 리스트를 공유한다
@@ -57,7 +57,7 @@ class SharingTest(FunctionalTest):
         ))
 
         # 해당 리스트에 작업 아이템을 추가한다
-        list_page.add_new_item('안녕 에디스!')
+        list_page.add_new_item('안녕 에디스')
 
         # 에디스가 페이지를 새로고침하면 오니가 추가한 것을 볼 수 있다
         self.browser = edith_browser
